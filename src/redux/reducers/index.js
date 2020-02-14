@@ -1,19 +1,11 @@
-const initialState = {
-    id: null,
-    title: "",
-    text: "",
-    photo: "",
-    active: true,
-    data: ""
-}
+import { combineReducers } from 'redux'
+import articles from './articlesReducers';
+import posts from './postsReducer';
 
-export default function (state = initialState, action) {
-    switch(action.type) {
-        case "ADD_ARTICLES": 
-        return {
-            ...state, ...action.payload
-        }
-        default:
-            return state
-    }
-}
+export default combineReducers({
+    articles,
+    posts
+})
+
+
+
