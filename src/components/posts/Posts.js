@@ -1,7 +1,5 @@
-import React, {useEffect} from 'react'
-import { bindActionCreators } from 'redux'
-import {connect, useSelector} from 'react-redux'
-import {addArticles} from '../../redux/actions/articalsActions'
+import React from 'react'
+import {useSelector} from 'react-redux'
 import Post from '../post'
 
 
@@ -21,10 +19,6 @@ import Post from '../post'
       
     )
 }
-const mapDispatchToProps = (dispatch, state) => {
-    return bindActionCreators({
-        addArticles: addArticles,
-    }, dispatch)
-}
 
-export default connect(null, mapDispatchToProps)(Posts)
+
+export default Posts

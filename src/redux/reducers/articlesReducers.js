@@ -1,18 +1,16 @@
-const initialState = {
-    id: null,
-    title: "",
-    text: "",
-    photo: "",
-    active: true,
-    data: ""
-}
+import {addedInfoTOFirstStep, formNewArticleState} from '../../utils'
 
- const ArticlesReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case "ADD_ARTICLES": 
-        return {
-            ...state, ...action.payload
-        }
+ const ArticlesReducer = (state = [], {type, payload}) => {
+    switch(type) {
+        case "INITIATE_ARTICLES":
+        return formNewArticleState(state, payload)
+        case "ADD_ARTICLE_FIRST-STEP": 
+        return [
+            ...state, payload
+        ]
+        // eslint-disable-next-line no-duplicate-case
+        case "ADD_ARTICLE_SECOND-STEP": 
+             return addedInfoTOFirstStep(state, payload)
         default:
             return state
     }

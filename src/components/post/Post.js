@@ -1,11 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { useHistory } from "react-router-dom";
 
 import { deletePost } from '../../redux/actions/postsActions'
 
  const Post = ({title, body, id, deletePost}) => {
-console.log(deletePost)
+    const { push } = useHistory();
+    const onCreateArticle = () => {
+        push(`/step1/${id}`);
+    }
     return (
         <div className="post">
             <div className="post_content">
@@ -14,7 +18,7 @@ console.log(deletePost)
             </div>
             <div className="post_btns">
                 <button onClick={deletePost}  className="post_btn post_btn--red">Delete</button>
-                <button className="post_btn post_btn--green">Create article</button>
+                <button onClick={onCreateArticle} className="post_btn post_btn--green">Create article</button>
             </div>
         </div>
     )

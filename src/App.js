@@ -14,7 +14,7 @@ function App() {
           component={StepOne}
         />
          <Route 
-          path="/step2"
+          path="/step2/:id"
           component={StepTwo}
         />
         <Route 

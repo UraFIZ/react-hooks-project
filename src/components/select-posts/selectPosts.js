@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { bindActionCreators } from 'redux'
 import {connect} from 'react-redux'

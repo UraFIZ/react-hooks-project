@@ -26,5 +26,18 @@ export const getDeletedPostItem = (arr, id) => {
 export const formNewState =(state, arr) => {
   const newState = state.slice(0,0);
   return [...newState, ...arr];
-   
+}
+export const formNewArticleState =(state, arr) => {
+  const newState = state.slice(0,0);
+  return [...newState, ...arr];
+}
+export const addedInfoTOFirstStep = (state, data) => {
+const objInx = state.findIndex(item => item.id === data.id);
+const currentArticle = state.find(item => item.id === data.id);
+const newArticle = {...currentArticle, ...data}
+    return [
+        ...state.slice(0, objInx),
+        newArticle,
+        ...state.slice(objInx+1)
+    ]
 }

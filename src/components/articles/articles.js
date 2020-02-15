@@ -1,12 +1,32 @@
-import React from 'react'
+import React,  {useEffect}  from 'react'
 import Article from '../article'
+import {connect} from 'react-redux'
+import { bindActionCreators } from 'redux'
+import {useDispatch, useSelector} from "react-redux"
+import {initArticlesPageWhileReloading} from '../../redux/actions/articalsActions'
 
-const Articles = () => {
+const Articles = ({initArticlesPageWhileReloading}) => {
+    const articles = useSelector(state => state.articles);
+    console.log(articles)
+    useEffect(()=> {
+        if(articles.length < 1) {
+            initArticlesPageWhileReloading();
+        }
+    }, [])
     return (
         <div className="articles-wrapper">
-            <Article />
+            {
+              articles.map(item => (
+                   <Article key={item.id} />
+              ))
+            }
+            
         </div>
     )
 }
-
-export default Articles
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        initArticlesPageWhileReloading: initArticlesPageWhileReloading
+    }, dispatch)
+}
+export default connect(null, mapDispatchToProps)(Articles)
