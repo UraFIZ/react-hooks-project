@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import { deletePost } from '../../redux/actions/postsActions'
 
- const Post = ({title, body, id, deletePost}) => {
+ const Post = ({title, body, id, deletePost, isUsed}) => {
     const { push } = useHistory();
     const onCreateArticle = () => {
         push(`/step1/${id}`);
@@ -18,7 +18,7 @@ import { deletePost } from '../../redux/actions/postsActions'
             </div>
             <div className="post_btns">
                 <button onClick={deletePost}  className="post_btn post_btn--red">Delete</button>
-                <button onClick={onCreateArticle} className="post_btn post_btn--green">Create article</button>
+                <button onClick={onCreateArticle} className="post_btn post_btn--green" disabled={isUsed} >Create article</button>
             </div>
         </div>
     )

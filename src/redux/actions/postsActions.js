@@ -14,11 +14,10 @@ const deletePostAction = (id) => {
         payload: id
     }
 }
-export const getPostsFromJP = (postAmount) => async dispatch => {
+export const getPostsFromJP = (postAmount, articlesArr) => async dispatch => {
     const gotPosts = await postUrl.get();
-    const postsArrayShortenAndTransformed = getPostsArrayShortenAndTransformed(gotPosts.data,postAmount);
+    const postsArrayShortenAndTransformed = getPostsArrayShortenAndTransformed(gotPosts.data,postAmount, articlesArr);
     dispatch(fetchPosts(postsArrayShortenAndTransformed));
-
 }
 
 export const deletePost = (id) => () => async (dispatch) => {

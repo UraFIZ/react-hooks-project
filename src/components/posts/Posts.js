@@ -1,18 +1,16 @@
 import React from 'react'
-import {useSelector} from 'react-redux'
 import Post from '../post'
+import {useSelector} from 'react-redux'
 
 
 
  function Posts() {
-
-    const posts = useSelector(state => state.posts);
-        
+    const posts = useSelector(state => state.posts)
+          
     return (
-
         <div className="posts-wrapper">
             {
-              posts.map((item) => <Post key={item.id} id={item.id} title={item.title} body={item.body}  /> )
+            posts.map((item) => <Post key={item.id} id={item.id} title={item.title} body={item.body} isUsed={item.isUsed} /> )
             }
 
         </div>

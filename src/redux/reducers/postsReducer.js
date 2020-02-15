@@ -1,5 +1,7 @@
 
 import {getDeletedPostItem, formNewState} from '../../utils'
+
+
 const PostReducers = (state = [], {type, payload}) => {
         switch(type) {
             case "DELETE_POST":

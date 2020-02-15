@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import {useSelector} from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {connect} from 'react-redux'
 import {getPostsFromJP} from '../../redux/actions/postsActions'
@@ -7,7 +8,13 @@ import {getPostsFromJP} from '../../redux/actions/postsActions'
 
  const SelectPosts = ({getPostsFromJP}) => {
     const { register, handleSubmit } = useForm()
-    const onSubmit = data => getPostsFromJP(+data.quantity)
+    const articles = useSelector(state => state.articles);
+
+    const onSubmit = data => {
+        localStorage.removeItem("select");
+        localStorage.setItem("select",JSON.stringify(+data.quantity));
+        getPostsFromJP(+data.quantity, articles)
+    }
 
     return (
         <div>

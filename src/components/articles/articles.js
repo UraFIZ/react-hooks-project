@@ -7,7 +7,7 @@ import {initArticlesPageWhileReloading} from '../../redux/actions/articalsAction
 
 const Articles = ({initArticlesPageWhileReloading}) => {
     const articles = useSelector(state => state.articles);
-    console.log(articles)
+
     useEffect(()=> {
         if(articles.length < 1) {
             initArticlesPageWhileReloading();

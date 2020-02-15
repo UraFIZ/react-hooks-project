@@ -1,4 +1,4 @@
-import {addedInfoTOFirstStep, formNewArticleState} from '../../utils'
+import {addedInfoTOFirstStep, formNewArticleState, removeArticleFromState} from '../../utils'
 
  const ArticlesReducer = (state = [], {type, payload}) => {
     switch(type) {
@@ -11,6 +11,8 @@ import {addedInfoTOFirstStep, formNewArticleState} from '../../utils'
         // eslint-disable-next-line no-duplicate-case
         case "ADD_ARTICLE_SECOND-STEP": 
              return addedInfoTOFirstStep(state, payload)
+        case "DELETE_ARTICLE":
+            return removeArticleFromState(state, payload)
         default:
             return state
     }
