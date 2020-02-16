@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux"
-import { useForm } from "react-hook-form";
+import { useForm, ErrorMessage } from "react-hook-form";
 import _ from 'lodash';
 import { useHistory, useParams } from "react-router-dom";
 import {postUrl, photoUrl} from '../../../api';
@@ -71,7 +71,7 @@ const Step1 = props => {
       }
       <span className={dynamicState.showItems ? "custom-select-arrow--up": "custom-select-arrow--down"}></span>
     </div>
-    <div style={{display: dynamicState.showItems ? 'block': 'none'}}>
+    <div className="custom-select-wrapper" style={{display: dynamicState.showItems ? 'block': 'none'}}>
       {
             step1Form.photos.map(item => customSelectOption(item))
       }
@@ -87,18 +87,21 @@ const Step1 = props => {
   return (
     <div className="form-container">
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <h2>Step 1</h2>
+      <h2 className="form-title">Step 1</h2>
       <label className="form-control-wrapper">
         Title:
-        <input className="form-control" name="title" defaultValue={step1Form.title} ref={register}/>
+        <input className="form-control" name="title" defaultValue={step1Form.title} ref={register({ required: "This is required." })}/>
+        <ErrorMessage errors={errors} name="title" as="p" />
       </label>
       <label className="form-control-wrapper">
         Subtitle:
-        <input className="form-control" name="subtitle" ref={register}/>
+        <input className="form-control" name="subtitle" ref={register({ required: "This is required." })}/>
+        <ErrorMessage errors={errors} name="subtitle" as="p" />
       </label>
       <label className="form-control-wrapper">
         body:
-        <textarea className="form-control step-form-control--area " name="body" defaultValue={step1Form.body} ref={register}/>
+        <textarea className="form-control form-control--area " name="body" defaultValue={step1Form.body} ref={register({ required: "This is required." })}/>
+        <ErrorMessage errors={errors} name="body" as="p" />
       </label>
       <label className="form-control-wrapper">
           Select photos
@@ -106,7 +109,7 @@ const Step1 = props => {
             renderPhotos()
           }
       </label>
-      <input className="step-form-btn" type="submit" />
+      <input className="form-btn" type="submit" />
     </form>
     </div>
 

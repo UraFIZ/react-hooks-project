@@ -4,6 +4,8 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    height: 100vh;
+    
 }
 .custom-row {
     display: flex;
@@ -25,9 +27,12 @@
 }
 .articles-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     max-width: 50%;
     flex: 0 0 50%;
     border: 1px solid black;
     padding: 10px;
+    height: 100%;
+    flex-wrap: wrap;
 }

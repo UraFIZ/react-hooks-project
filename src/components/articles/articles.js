@@ -2,7 +2,7 @@ import React,  {useEffect}  from 'react'
 import Article from '../article'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {useDispatch, useSelector} from "react-redux"
+import {useSelector} from "react-redux"
 import {initArticlesPageWhileReloading} from '../../redux/actions/articalsActions'
 
 const Articles = ({initArticlesPageWhileReloading}) => {

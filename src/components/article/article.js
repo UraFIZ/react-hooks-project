@@ -4,21 +4,27 @@ import { bindActionCreators } from 'redux'
 import {useSelector} from "react-redux"
 import { deleteArticle } from '../../redux/actions/articalsActions'
 import {changeBtnStatuses} from '../../redux/actions/postsActions'
-const Article = ({title, subtitle, body, photo, id, deleteArticle, changeBtnStatuses}) => {
+const Article = ({title, subtitle, body, photo, id, date, isAllowedAd, deleteArticle, changeBtnStatuses}) => {
     const deleteArticleAndRefrash =()=> {
         deleteArticle();
-        changeBtnStatuses()
+        if(posts.length > 0) {
+            changeBtnStatuses()
+        }
     }
+    const posts = useSelector((state) => state.posts);
     return (
         <article id={id} className="article">
-            <div className="article_banner">You are the best article creater. Become event better going to this link</div>
+            <div style={{display: isAllowedAd ? "block" : "none"}} className="article_banner">You are the best article creater. Become event better going to this link</div>
             <div className="article_header">
                 <div className="article_title-wrapper">
                      <div className="article_title">{title}</div>
                      <div className="article_subtitle">{subtitle}</div>
                 </div>
-                 <span onClick={deleteArticleAndRefrash} className="article_delete">X</span>
-                 {/* <div className="article-date">{date}</div>  */}
+                <div className="article_delete-wrapper">
+                     <span onClick={deleteArticleAndRefrash} className="article_delete">X</span>
+                     <div className="article-date">{date}</div>
+                </div>
+
             </div>
 
             <div className="article_content-wrapper">

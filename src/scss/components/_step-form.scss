@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10rem;
+    height: 100vh;
+    margin: 0 auto;
 }
 .form {
     width: 40rem;
@@ -14,7 +15,30 @@
     justify-content: center;
     &-control {
         width: 40rem;
-        height: 5rem;
+        height: 4rem;
+        position: relative;
+        margin-bottom: 1rem;
+        padding: 5px;
+        margin: 0;
+        &--area {
+            height: 7rem;
+        }
+    }
+    &-control-wrapper {
+        position: relative;
+    }
+    &-btn {
+        display: inline-block;
+        width: 100%;
+        height: 4rem;
+        margin-top: 2rem;
+        color: white;
+        border: none;
+        background: #ec5990;
+        cursor: pointer;
+    }
+    &-title {
+        color: white;
     }
 }
 .custom-select {
@@ -48,6 +72,23 @@
         border: 1px solid;
         cursor: pointer;
         position: relative;
+        background: white;
+    }
+    &-placeholder {
+        font-size: 1.1rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
+        padding: 1rem;
+    }
+    &-wrapper {
+        display: block;
+        height: 300px;
+       overflow-y: scroll;
+       position: absolute;
+       z-index: 12;
+       background: beige;
     }
     &-arrow--down {
         position: absolute;
@@ -69,4 +110,12 @@
         border-right: 8px solid transparent;
         border-bottom: 10px solid black;
     }
+}
+
+.form-control + p {
+    margin: 0;
+    height: 2rem;
+    width: 100%;
+    color: white;
+    background-color: rgba(206, 26, 26, 0.664);
 }

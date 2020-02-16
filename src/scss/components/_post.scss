@@ -2,6 +2,7 @@
     &:not(:last-child) {
         margin-bottom: 1rem;
     } 
+    background-color: white;
     display: flex;
     box-shadow: 0 3px 12px -1px #443e3e;
     padding: 10px;
@@ -9,6 +10,15 @@
         flex: 0 0 70%;
         max-width: 70%;
         padding-right: 1rem;
+    }
+    &_btn--red {
+        color: black;
+        border: none;
+    }
+    &_btn--green {
+        background-color: green;
+        color: white;
+        border: none;
     }
     &_btns {
         flex: 0 0 30%;
