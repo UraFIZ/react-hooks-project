@@ -17,7 +17,7 @@ const Articles = ({initArticlesPageWhileReloading}) => {
         <div className="articles-wrapper">
             {
               articles.map(item => (
-                   <Article key={item.id} />
+                   <Article key={item.id} title={item.title} subtitle={item.subtitle} photo={item.currentPhoto} body={item.body} id={item.id} date={item.date} isAllowedAd={item.active}/>
               ))
             }
             

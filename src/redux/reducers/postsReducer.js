@@ -1,5 +1,5 @@
 
-import {getDeletedPostItem, formNewState} from '../../utils'
+import {getDeletedPostItem, formNewState, getUpdatePostItem} from '../../utils'
 
 
 const PostReducers = (state = [], {type, payload}) => {
@@ -8,6 +8,8 @@ const PostReducers = (state = [], {type, payload}) => {
                 return getDeletedPostItem(state, payload)
             case "FETCH_POSTS":
                 return formNewState(state, payload)
+            case "UPDATE_POST":
+                return getUpdatePostItem(state, payload)
             default:
                 return state
         }

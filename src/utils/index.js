@@ -63,17 +63,32 @@ const findPickedStateObj = (state, id) => {
     }
 }
 export const addedInfoTOFirstStep = (state, data) => {
+
 const {objInx, currentArticle} = findPickedStateObj(state, data.id);
 const newArticle = {...currentArticle, ...data}
+
     return [
         ...state.slice(0, objInx),
-        newArticle
+        newArticle,
+        ...state.slice(objInx+1),
+
     ]
 }
 export const removeArticleFromState = (state, id) => {
+
     const {objInx, currentArticle} = findPickedStateObj(state, id);
         return [
-            state.slice(0, objInx),
-            state.slice(objInx+1)
+            ...state.slice(0, objInx),
+            ...state.slice(objInx+1)
         ]
+}
+export const getUpdatePostItem = (state, id) => {
+    const currentInx = state.findIndex(item => item.id == id);
+    const currentObj = state.find(item => item.id == id);
+
+    return [
+        ...state.slice(0, currentInx),
+        {...currentObj, isUsed:false},
+        ...state.slice(currentInx+1)
+    ]
 }

@@ -8,6 +8,12 @@ const fetchPosts = (data) => {
         payload: data
     }
 }
+const updatePost = (id) => {
+    return {
+        type: "UPDATE_POST",
+        payload: id
+    }
+}
 const deletePostAction = (id) => {
     return {
         type: "DELETE_POST",
@@ -22,4 +28,7 @@ export const getPostsFromJP = (postAmount, articlesArr) => async dispatch => {
 
 export const deletePost = (id) => () => async (dispatch) => {
        dispatch(deletePostAction(id))
+}
+export const changeBtnStatuses =(id) => () => async(dispatch) => {
+    dispatch(updatePost(id))
 }
