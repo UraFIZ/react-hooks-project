@@ -83,9 +83,12 @@ const Step1 = props => {
     dispatch(addArticlesStep1({...data, currentPhoto, id}))
     push(`/step2/${id}`);
   };
-
+  const getBack = () => {
+    push("/")
+  }
   return (
     <div className="form-container">
+      <h1 className="heading-secondary">First step to amazing article</h1>
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <h2 className="form-title">Step 1</h2>
       <label className="form-control-wrapper">
@@ -110,6 +113,7 @@ const Step1 = props => {
           }
       </label>
       <input className="form-btn" type="submit" />
+      <div className="form-btn-back" onClick={getBack}>Get back</div>
     </form>
     </div>
 

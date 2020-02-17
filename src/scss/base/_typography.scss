@@ -6,7 +6,7 @@ body {
     color: $color-grey-dark;
 }
 .heading-primary {
-    color: $color-primary;
+    color: $color-grey-dark-3;
     text-transform: uppercase;
     backface-visibility: hidden;
     margin-bottom: 3rem;
@@ -19,6 +19,12 @@ body {
             letter-spacing: 1rem;
             font-family: 5rem;
         }
+    }
+    &--main-little {
+        display: block;
+        font-size: 1.1rem;
+        font-weight: 400;
+        letter-spacing: 3rem;
     }
     &--sub {
         display: block;

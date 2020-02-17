@@ -24,6 +24,7 @@ const dispatch = useDispatch();
   const articles = useSelector(state => state.articles)
   return (
     <div className="form-container">
+      <h1 className="heading-secondary">You are almost done</h1>
     <form className="form"  onSubmit={handleSubmit(onSubmit)}>
       <h2 className="form-title">Step 2</h2>
       <label className="form-control-wrapper">
@@ -35,10 +36,11 @@ const dispatch = useDispatch();
         Date of publishing:
         <input className="form-control"  name="date" type="date" ref={register} />
       </label>
-      <label className="form-control-wrapper">
-        Does make ad active?:
-        <input  name="active" type="checkbox" ref={register}/>
-      </label>
+      <div className="checkbox-wrapper">
+          <input className="form-checkbox" id="checkbox" name="active" type="checkbox" ref={register}/>
+          <label for="checkbox" className="checkbox-label">  Does make ad active?:</label>
+      </div>
+  
       <input className="form-btn" type="submit" />
     </form>
     </div>

@@ -19,13 +19,13 @@ import {getPostsFromJP} from '../../redux/actions/postsActions'
     return (
         <div className="container"> 
             <h3 className="heading-secondary">Select an amount of posts to write an amazing article</h3>
-            <form className="post-form" onSubmit={handleSubmit(onSubmit)}>
-                <select className="post-select" name="quantity" ref={register}>
+            <form className="form-select" onSubmit={handleSubmit(onSubmit)}>
+                <select className="post-form post-form-select" name="quantity" ref={register}>
                     <option value="5">0-5</option>
                     <option value="10">5-10</option>
                     <option value="15">10-15</option>
                 </select>
-                <input type="submit" />
+                <input className="post-form post-form-submit-btn" type="submit" />
             </form>
         </div>
     )

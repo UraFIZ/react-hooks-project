@@ -42,10 +42,6 @@ const addPostObjBoolProperty = (objArr) => {
 }
 
 
-export const getDeletedPostItem = (arr, id) => {
-    return arr.filter(item => item.id !== id);
-
-}
 export const formNewState =(state, arr) => {
   const newState = state.slice(0,0);
   return [...newState, ...arr];

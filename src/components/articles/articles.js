@@ -15,9 +15,10 @@ const Articles = ({initArticlesPageWhileReloading}) => {
     }, [])
     return (
         <div className="articles-wrapper">
+         <h3 className="articles-title">Articles</h3>
             {
               articles.map(item => (
-                   <Article key={item.id} title={item.title} subtitle={item.subtitle} photo={item.currentPhoto} body={item.body} id={item.id} date={item.date} isAllowedAd={item.active}/>
+                   <Article key={item.id} title={item.title} subtitle={item.subtitle} photo={item.currentPhoto} body={item.body} id={item.id} date={item.date} email={item.email} isAllowedAd={item.active}/>
               ))
             }
             
