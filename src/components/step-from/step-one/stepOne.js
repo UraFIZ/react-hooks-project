@@ -16,6 +16,7 @@ const Step1 = props => {
     subtitle: '',
     body: '',
     photos: [],
+    isLoading: true
   });
   const [dynamicState, setDynamicState] = useState({
     showItems: false,
@@ -46,7 +47,8 @@ const Step1 = props => {
       ...step1Form,
       title,
       body,
-      photos
+      photos,
+      isLoading: false
     })
   }
   useEffect(()=> {
@@ -86,7 +88,8 @@ const Step1 = props => {
   const getBack = () => {
     push("/")
   }
-  return (
+  return ( 
+    !step1Form.isLoading ?
     <div className="form-container">
       <h1 className="heading-secondary">First step to amazing article</h1>
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -116,7 +119,7 @@ const Step1 = props => {
       <div className="form-btn-back" onClick={getBack}>Get back</div>
     </form>
     </div>
-
+    : <div className="loader"></div>
   );
 };
 
