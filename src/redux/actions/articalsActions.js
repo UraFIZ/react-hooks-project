@@ -1,4 +1,4 @@
-import {baseURL, postUrl} from '../../api';
+import {baseURL} from '../../api';
 
 
 const addArticle =(data) => {
