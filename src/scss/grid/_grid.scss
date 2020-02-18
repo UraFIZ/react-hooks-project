@@ -23,6 +23,7 @@
 }
 .posts {
     &-wrapper {
+        position: relative;
         display: flex;
         flex-direction: column;
         @include respond(tab-port) {

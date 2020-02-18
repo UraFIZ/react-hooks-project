@@ -1,8 +1,7 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
 
-
- const Post = ({title, body, id, deletePost, isUsed}) => {
+ const Post = ({title, body, id, isUsed}) => {
     const { push } = useHistory();
     const onCreateArticle = () => {
         push(`/step1/${id}`);

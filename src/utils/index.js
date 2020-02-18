@@ -45,7 +45,7 @@ export const formNewState =(state, data) => {
     const { blanks = []} = state;
     const {postsArrayShortenAndTransformed, postAmount} = data;
   const newState = blanks.slice(0,0);
-  return {...state, blanks:[...newState,  ...postsArrayShortenAndTransformed], amount: postAmount};
+  return {...state, loading: false, blanks:[...newState,  ...postsArrayShortenAndTransformed], amount: postAmount};
 }
 
 export const formNewArticleState =(state, arr) => {
