@@ -8,7 +8,7 @@ import {getPostsFromJP} from '../../redux/actions/postsActions'
 
  const SelectPosts = ({getPostsFromJP}) => {
     const { register, handleSubmit } = useForm()
-    const articles = useSelector(state => state.articles);
+    const articles = useSelector(state => state.articles.articles);
 
     const onSubmit = data => {
         getPostsFromJP(+data.quantity, articles)

@@ -6,7 +6,7 @@ import {useSelector} from "react-redux"
 import {initArticlesPageWhileReloading} from '../../redux/actions/articalsActions'
 
 const Articles = ({initArticlesPageWhileReloading}) => {
-    const articles = useSelector(state => state.articles);
+    const articles = useSelector(state => state.articles.articles);
 
     useEffect(()=> {
         if(articles.length < 1) {

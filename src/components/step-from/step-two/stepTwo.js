@@ -4,7 +4,7 @@ import { useForm, ErrorMessage } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
 import {useDispatch, useSelector, connect} from "react-redux"
 import { addArticlesStep2 } from '../../../redux/actions/articalsActions'
-import { getPostsFromJP, changeBtnStatuses } from '../../../redux/actions/postsActions'
+import {  changeBtnStatuses } from '../../../redux/actions/postsActions'
 import {baseURL} from '../../../api'
 
 const Step2 = props => {
@@ -20,7 +20,7 @@ const dispatch = useDispatch();
     props.changeBtnStatuses();
     push("/")
   };
-  const article = useSelector(state => state.articles.find(item => item.id ===id));
+  const article = useSelector(state => state.articles.articles.find(item => item.id ===id));
   return (
     <div className="form-container">
       <h1 className="heading-secondary">You are almost done</h1>

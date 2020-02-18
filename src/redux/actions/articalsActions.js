@@ -7,6 +7,12 @@ const addArticle =(data) => {
         payload: data
     }
 }
+const addArticleStepTwo =(data) => {
+    return {
+        type: "ADD_ARTICLE_SECOND-STEP",
+        payload: data
+    }
+}
 const initiateArticles = (data) => {
     return {
         type: "INITIATE_ARTICLES",
@@ -25,10 +31,7 @@ export const addArticlesStep1 = formValues => async dispatch => {
 }
 export const addArticlesStep2 = formValues => async dispatch => {
     // baseURL.post('/articles', formValues)
-    dispatch({
-        type: "ADD_ARTICLE_SECOND-STEP",
-        payload: formValues
-    })
+    dispatch(addArticleStepTwo(formValues))
 }
 export const initArticlesPageWhileReloading = () => async dispatch => {
     const articles = await baseURL.get("/articles");
