@@ -1,7 +1,7 @@
 
 
 ## About application
-This application was created to born amazing articles with a help of Jsonplaceholder's samples.
+This application was created to born amazing articles with a help of Jsonplaceholder's samples. It's fully responsive.
 
 ## How it works?
 First think first it is necessary to start server. https://github.com/UraFIZ/json-server.git .It works on localhost:3001
