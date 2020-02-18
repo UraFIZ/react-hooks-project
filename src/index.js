@@ -15,11 +15,11 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunkMiddlew
 
 ReactDOM.render(
     <Provider store={store}>
-       <ErrorBounders>
+       {/* <ErrorBounders> */}
          <Router>
             <App />
           </Router>
-       </ErrorBounders>
+       {/* </ErrorBounders> */}
     </Provider>, 
 document.getElementById('root'));
 

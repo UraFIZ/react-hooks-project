@@ -25,6 +25,12 @@ const deleteArticleAction = (id) => {
         payload: id
     }
 }
+const catchErrorAction = (data) => {
+    return {
+        type: "ERROR_REGISTRATION",
+        payload: data
+    }
+}
 export const addArticlesStep1 = formValues => async dispatch => {
     // baseURL.post('/articles', formValues)
     dispatch(addArticle(formValues))
@@ -35,8 +41,11 @@ export const addArticlesStep2 = formValues => async dispatch => {
 }
 export const initArticlesPageWhileReloading = () => async dispatch => {
     const articles = await baseURL.get("/articles");
-    console.log("articles from db in initAC", articles.data);
-    dispatch(initiateArticles(articles.data));
+    if(articles.statusText !== "OK") {
+        dispatch(catchErrorAction(articles.articles));
+    }else{
+        dispatch(initiateArticles(articles.data));
+    }
 
 }
 export const deleteArticle = (id) => () => async dispatch => {
