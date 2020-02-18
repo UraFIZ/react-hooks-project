@@ -1,8 +1,11 @@
 
 import {formNewState, getUpdatePostItem} from '../../utils'
+const initialState = {
+    blanks: [],
+    amount: null
+}
 
-
-const PostReducers = (state = [], {type, payload}) => {
+const PostReducers = (state = initialState, {type, payload}) => {
         switch(type) {
             case "FETCH_POSTS":
                 return formNewState(state, payload)

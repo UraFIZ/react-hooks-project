@@ -1,9 +1,10 @@
 import React from "react";
+import { bindActionCreators } from 'redux'
 import { useForm, ErrorMessage } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux"
+import {useDispatch, useSelector, connect} from "react-redux"
 import { addArticlesStep2 } from '../../../redux/actions/articalsActions'
-import { getPostsFromJP } from '../../../redux/actions/postsActions'
+import { getPostsFromJP, changeBtnStatuses } from '../../../redux/actions/postsActions'
 import {baseURL} from '../../../api'
 
 const Step2 = props => {
@@ -16,12 +17,10 @@ const dispatch = useDispatch();
     const resultTwoSteps = Object.assign({}, article, data);
     dispatch(addArticlesStep2({...data, id}));
     baseURL.post('/articles', resultTwoSteps);
-    const selectAmout = JSON.parse(localStorage.getItem("select"));
-    dispatch(getPostsFromJP(selectAmout, articles))
+    props.changeBtnStatuses();
     push("/")
   };
   const article = useSelector(state => state.articles.find(item => item.id ===id));
-  const articles = useSelector(state => state.articles)
   return (
     <div className="form-container">
       <h1 className="heading-secondary">You are almost done</h1>
@@ -47,5 +46,11 @@ const dispatch = useDispatch();
 
   );
 };
-
-export default Step2;
+const mapDispatchToProps = (dispatch, props) => {
+  const {match} = props;
+  const {params} = match;
+  return bindActionCreators({
+      changeBtnStatuses: changeBtnStatuses(params.id)
+  }, dispatch)
+}
+export default connect(null, mapDispatchToProps)(Step2);

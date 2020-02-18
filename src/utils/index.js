@@ -10,7 +10,6 @@ export const getPostsArrayShortenAndTransformed = (arr, number, articleArr) => {
         currentPostArr = arr.slice(10, number);
     }
     const transformedPostArr = checkIfPostDisabledToWriteArticle(addPostObjBoolProperty(currentPostArr), articleArr);
-    console.log("transformedPostArr", transformedPostArr);
     return transformedPostArr;
 
 }
@@ -42,10 +41,13 @@ const addPostObjBoolProperty = (objArr) => {
 }
 
 
-export const formNewState =(state, arr) => {
-  const newState = state.slice(0,0);
-  return [...newState, ...arr];
+export const formNewState =(state, data) => {
+    const { blanks = []} = state;
+    const {postsArrayShortenAndTransformed, postAmount} = data;
+  const newState = blanks.slice(0,0);
+  return {...state, blanks:[...newState,  ...postsArrayShortenAndTransformed], amount: postAmount};
 }
+
 export const formNewArticleState =(state, arr) => {
   const newState = state.slice(0,0);
   return [...newState, ...arr];
@@ -79,12 +81,18 @@ export const removeArticleFromState = (state, id) => {
         ]
 }
 export const getUpdatePostItem = (state, id) => {
-    const currentInx = state.findIndex(item => item.id == id);
-    const currentObj = state.find(item => item.id == id);
-
-    return [
-        ...state.slice(0, currentInx),
-        {...currentObj, isUsed:false},
-        ...state.slice(currentInx+1)
+    const {blanks} = state;
+    const currentInx = blanks.findIndex(item => item.id == id);
+    // const currentObj = blanks.find(item => item.id == id);
+    const currentObj = blanks[currentInx]
+    const value = !currentObj["isUsed"];
+    // let opositIsUsedValue = currentObj
+    const updatedArr = [
+        ...blanks.slice(0, currentInx),
+        {...currentObj, isUsed:value},
+        ...blanks.slice(currentInx+1)
     ]
+    return {
+        ...state, blanks:[...updatedArr]
+    }
 }

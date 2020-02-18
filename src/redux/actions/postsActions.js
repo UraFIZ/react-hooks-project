@@ -17,8 +17,12 @@ const updatePost = (id) => {
 
 export const getPostsFromJP = (postAmount, articlesArr) => async dispatch => {
     const gotPosts = await postUrl.get();
-    const postsArrayShortenAndTransformed = getPostsArrayShortenAndTransformed(gotPosts.data,postAmount, articlesArr);
-    dispatch(fetchPosts(postsArrayShortenAndTransformed));
+    const postsArrayShortenAndTransformed = getPostsArrayShortenAndTransformed(gotPosts.data, postAmount, articlesArr);
+    const objToDespatch = {
+        postsArrayShortenAndTransformed,
+        postAmount
+    }
+    dispatch(fetchPosts(objToDespatch));
 }
 
 export const changeBtnStatuses =(id) => () => async(dispatch) => {

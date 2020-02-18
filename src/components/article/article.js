@@ -11,7 +11,7 @@ const Article = ({title, subtitle, body, photo, id, date, email, isAllowedAd, de
             changeBtnStatuses()
         }
     }
-    const posts = useSelector((state) => state.posts);
+    const posts = useSelector((state) => state.posts.blanks);
     return (
         <article id={id} className="article">
             <div style={{display: isAllowedAd ? "flex" : "none"}} className="article_banner">You are the best article creater. Become event better going to this link</div>

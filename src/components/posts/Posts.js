@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux'
 
 
  function Posts() {
-    const posts = useSelector(state => state.posts)
+    const posts = useSelector(state => state.posts.blanks)
           
     return (
         <div className="posts-wrapper">

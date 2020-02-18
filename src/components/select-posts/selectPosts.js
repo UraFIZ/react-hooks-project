@@ -11,8 +11,6 @@ import {getPostsFromJP} from '../../redux/actions/postsActions'
     const articles = useSelector(state => state.articles);
 
     const onSubmit = data => {
-        localStorage.removeItem("select");
-        localStorage.setItem("select",JSON.stringify(+data.quantity));
         getPostsFromJP(+data.quantity, articles)
     }
 
