@@ -15,6 +15,17 @@
       right: 43%;
     }
   }
+  .error-indicator {
+    width: 48%;
+    height: 16rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ff7730;
+    color: white;
+    font-size: 20px;
+    margin: 0 auto;
+  }
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

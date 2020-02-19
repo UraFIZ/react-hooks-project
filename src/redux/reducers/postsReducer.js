@@ -3,7 +3,8 @@ import {formNewState, getUpdatePostItem} from '../../utils'
 const initialState = {
     blanks: [],
     amount: null,
-    loading: false
+    loading: false,
+    error: ''
 }
 
 const PostReducers = (state = initialState, {type, payload}) => {
@@ -12,6 +13,10 @@ const PostReducers = (state = initialState, {type, payload}) => {
                  return {
                      ...state, loading: true
                  }
+            case "POST_ERROR_REGISTRATION": 
+                return {
+                    ...state, error: payload, loading: false
+                }
             case "FETCH_POSTS":
                 return formNewState(state, payload)
             case "UPDATE_POST":

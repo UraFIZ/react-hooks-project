@@ -6,6 +6,12 @@ const postRequest = () => {
         type: "POST_REQUEST"
     }
 }
+const catchErrorAction = (data) => {
+    return {
+        type: "POST_ERROR_REGISTRATION",
+        payload: data
+    }
+}
 const fetchPosts = (data) => {
     return {
         type: "FETCH_POSTS",
@@ -21,13 +27,17 @@ const updatePost = (id) => {
 
 export const getPostsFromJP = (postAmount, articlesArr) => async dispatch => {
     dispatch(postRequest());
-    const gotPosts = await postUrl.get();
-    const postsArrayShortenAndTransformed = getPostsArrayShortenAndTransformed(gotPosts.data, postAmount, articlesArr);
-    const objToDespatch = {
-        postsArrayShortenAndTransformed,
-        postAmount
+    try {
+        const gotPosts = await postUrl.get();
+        const postsArrayShortenAndTransformed = getPostsArrayShortenAndTransformed(gotPosts.data, postAmount, articlesArr);
+        const objToDespatch = {
+            postsArrayShortenAndTransformed,
+            postAmount
+        }
+        dispatch(fetchPosts(objToDespatch));
+    } catch (error) {
+        dispatch(catchErrorAction(error.message))
     }
-    dispatch(fetchPosts(objToDespatch));
 }
 
 export const changeBtnStatuses =(id) => () => async(dispatch) => {

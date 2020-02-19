@@ -26,6 +26,7 @@
         position: relative;
         display: flex;
         flex-direction: column;
+        min-height: 300px;
         @include respond(tab-port) {
             max-width: 50%;
             flex: 0 0 50%;
@@ -51,9 +52,10 @@
         @include respond(tab-port) {
             flex-direction: column;
             align-items: center;
-            max-width: 50%;
+            max-height: 50%;
             flex: 0 0 50%;
         }
+        min-width: 300px;
         flex-direction: row;
         justify-content: space-between;
         max-width: 60%;

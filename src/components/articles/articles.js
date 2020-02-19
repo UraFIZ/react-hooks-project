@@ -5,14 +5,16 @@ import { bindActionCreators } from 'redux'
 import {useSelector} from "react-redux"
 import {initArticlesPageWhileReloading} from '../../redux/actions/articalsActions'
 import ErrorBounders from '../../components/error-boundry'
+import {baseURL} from '../../api';
 
 const Articles = ({initArticlesPageWhileReloading}) => {
     const articles = useSelector(state => state.articles.articles);
-
     useEffect(()=> {
-        if(articles.length < 1) {
-            initArticlesPageWhileReloading();
-        }
+        baseURL.get("/articles").then(data => {
+            if(data.data.length > 0 && articles.length < 1) {
+                initArticlesPageWhileReloading();
+            }
+        })
     }, [])
     return (
         <div className="articles-wrapper">

@@ -8,9 +8,9 @@ const initialState = {
     switch(type) {
         case "INITIATE_ARTICLES":
         return formNewArticleState(state, payload)
-        case "ERROR_REGISTRATION": 
+        case "ARTICLE_ERROR_REGISTRATION": 
         return {
-            ...state, error: payload
+            ...state, error: payload, loading: false
         }
         case "ADD_ARTICLE_FIRST-STEP": 
         return {

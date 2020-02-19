@@ -5,7 +5,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import thunkMiddleware from 'redux-thunk';
 import reducer from './redux/reducers'
-import ErrorBounders from './components/error-boundry'
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -15,11 +14,9 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunkMiddlew
 
 ReactDOM.render(
     <Provider store={store}>
-       {/* <ErrorBounders> */}
          <Router>
             <App />
           </Router>
-       {/* </ErrorBounders> */}
     </Provider>, 
 document.getElementById('root'));
 

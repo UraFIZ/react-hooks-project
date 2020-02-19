@@ -7,7 +7,7 @@ import {postUrl, photoUrl} from '../../../api';
 import { addArticlesStep1 } from '../../../redux/actions/articalsActions'
 
 
-const Step1 = props => {
+const Step1 = () => {
   const { handleSubmit, errors, register } = useForm();
   const { push } = useHistory();
   const { id } = useParams();
