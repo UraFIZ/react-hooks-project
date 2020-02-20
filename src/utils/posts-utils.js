@@ -12,7 +12,7 @@ export const getPostsArrayShortenAndTransformed = (arr, number, articleArr) => {
 
 }
 const checkIfPostDisabledToWriteArticle = (posts, articles) => {
-    if (articles.length > 0) {
+    if (articles.length > 0 && posts.length > 0) {
         return posts.map((item, inx) => {
             const data = articles.find((articlesItem) => {
                 if (item.id == articlesItem.id) {
@@ -34,28 +34,37 @@ const checkIfPostDisabledToWriteArticle = (posts, articles) => {
     }
 }
 const addPostObjBoolProperty = (objArr) => {
-    return objArr.map(item => Object.assign({}, item, { isUsed: false }))
+    if(Object.entries(objArr).length !== 0) {
+        return objArr.map(item => Object.assign({}, item, { isUsed: false }))
+    }
+    return objArr
+    
 }
 
 export const formNewState = (state, data) => {
     const { blanks = [] } = state;
     const { postsArrayShortenAndTransformed, postAmount } = data;
     const newState = blanks.slice(0, 0);
-    return { ...state, loading: false, blanks: [...newState, ...postsArrayShortenAndTransformed], amount: postAmount };
+    return { ...state, loading: false, error: "", blanks: [...newState, ...postsArrayShortenAndTransformed], amount: postAmount };
 }
 export const getUpdatePostItem = (state, id) => {
     const { blanks } = state;
-    const currentInx = blanks.findIndex(item => item.id == id);
-    // const currentObj = blanks.find(item => item.id == id);
-    const currentObj = blanks[currentInx]
-    const value = !currentObj["isUsed"];
-    // let opositIsUsedValue = currentObj
-    const updatedArr = [
-        ...blanks.slice(0, currentInx),
-        { ...currentObj, isUsed: value },
-        ...blanks.slice(currentInx + 1)
-    ]
-    return {
-        ...state, blanks: [...updatedArr]
+    if(blanks.length > 0) {
+        const currentInx = blanks.findIndex(item => item.id == id);
+        // const currentObj = blanks.find(item => item.id == id);
+        const currentObj = blanks[currentInx]
+        const value = !currentObj["isUsed"];
+        // let opositIsUsedValue = currentObj
+        const updatedArr = [
+            ...blanks.slice(0, currentInx),
+            { ...currentObj, isUsed: value },
+            ...blanks.slice(currentInx + 1)
+        ]
+        return {
+            ...state, blanks: [...updatedArr]
+        }
+    }else{
+        return state
     }
+
 }

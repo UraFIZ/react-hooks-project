@@ -6,22 +6,39 @@ const postRequest = () => {
         type: "POST_REQUEST"
     }
 }
+export const stepFormRequest = () => {
+    return {
+        type: "STEP_FORM_REQUEST"
+    }
+}
 const catchErrorAction = (data) => {
     return {
         type: "POST_ERROR_REGISTRATION",
         payload: data
     }
 }
+
 const fetchPosts = (data) => {
     return {
         type: "FETCH_POSTS",
         payload: data
     }
 }
+export const fetchDataFOrStepForm = () => {
+    return {
+        type: 'FETCHING_DATA_FOR_STEP_FORM'
+    }
+}
 const updatePost = (id) => {
     return {
         type: "UPDATE_POST",
         payload: id
+    }
+}
+export const catchStepFormError = (data) => {
+    return {
+        type: "STEP_FORM_ERROR_REGISTRATION",
+        payload: data
     }
 }
 

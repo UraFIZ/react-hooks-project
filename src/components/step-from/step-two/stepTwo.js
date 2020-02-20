@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { bindActionCreators } from 'redux'
 import { useForm, ErrorMessage } from "react-hook-form";
 import { useHistory, useParams } from "react-router-dom";
 import {useDispatch, useSelector, connect} from "react-redux"
-import { addArticlesStep2 } from '../../../redux/actions/articalsActions'
+import { addArticlesStep2, catchErrorAction } from '../../../redux/actions/articalsActions'
 import {  changeBtnStatuses } from '../../../redux/actions/postsActions'
 import {baseURL} from '../../../api'
 
@@ -13,11 +13,18 @@ const dispatch = useDispatch();
   const { push } = useHistory();
   const { id } = useParams();
 
+
+
   const onSubmit = data => {
     const resultTwoSteps = Object.assign({}, article, data);
     dispatch(addArticlesStep2({...data, id}));
-    baseURL.post('/articles', resultTwoSteps);
-    props.changeBtnStatuses();
+    try {
+      baseURL.post('/articles', resultTwoSteps);
+      props.changeBtnStatuses();
+    } catch (error) {
+      dispatch(catchErrorAction(error.message))
+    }
+ 
     push("/")
   };
   const article = useSelector(state => state.articles.articles.find(item => item.id ===id));
@@ -37,7 +44,7 @@ const dispatch = useDispatch();
       </label>
       <div className="checkbox-wrapper">
           <input className="form-checkbox" id="checkbox" name="active" type="checkbox" ref={register}/>
-          <label for="checkbox" className="checkbox-label">  Does make ad active?:</label>
+          <label htmlFor="checkbox" className="checkbox-label">  Does make ad active?:</label>
       </div>
   
       <input className="form-btn" type="submit" />

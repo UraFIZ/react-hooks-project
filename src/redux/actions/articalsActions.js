@@ -25,7 +25,7 @@ const deleteArticleAction = (id) => {
         payload: id
     }
 }
-const catchErrorAction = (data) => {
+export const catchErrorAction = (data) => {
     return {
         type: "ARTICLE_ERROR_REGISTRATION",
         payload: data

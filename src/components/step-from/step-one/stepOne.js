@@ -1,22 +1,30 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import { useForm, ErrorMessage } from "react-hook-form";
 import _ from 'lodash';
 import { useHistory, useParams } from "react-router-dom";
 import {postUrl, photoUrl} from '../../../api';
 import { addArticlesStep1 } from '../../../redux/actions/articalsActions'
+import { catchStepFormError, fetchDataFOrStepForm, stepFormRequest } from '../../../redux/actions/postsActions'
+import Spinner from '../../../containers/spinner'
+import ErrorIndicator from '../../../containers/error-indicator'
 
 
 const Step1 = () => {
   const { handleSubmit, errors, register } = useForm();
   const { push } = useHistory();
   const { id } = useParams();
+
+  //data from the redux store
+  const formError = useSelector(state => state.posts.error);
+  const loading = useSelector(state => state.posts.loading);
+
+  
   const [step1Form, setState] = useState({
     title: '',
     subtitle: '',
     body: '',
-    photos: [],
-    isLoading: true
+    photos: []
   });
   const [dynamicState, setDynamicState] = useState({
     showItems: false,
@@ -31,28 +39,37 @@ const Step1 = () => {
       selectedPhoto: data
     })
   }
-  const getInitialDataForForm = async () => {
-    const currentPost = await postUrl.get(`/${id}`);
-    const photosArr = await photoUrl.get(`?albumId=${id}`);
-    const photos = photosArr.data.slice(0, 10).map(item => {
-      return {
-        url: item.url,
-        id: item.id,
-        photoTitle: item.title
-      }
-    })
 
-    const {title, body} = currentPost.data;
-    setState({
-      ...step1Form,
-      title,
-      body,
-      photos,
-      isLoading: false
-    })
+  const getInitialDataForForm = async () => {
+    try {
+      dispatch(stepFormRequest())
+      const currentPost = await postUrl.get(`/${id}`);
+      const photosArr = await photoUrl.get(`?albumId=${id}`);
+      const photos = photosArr.data.slice(0, 10).map(item => {
+        return {
+          url: item.url,
+          id: item.id,
+          photoTitle: item.title
+        }
+      })
+      const {title, body} = currentPost.data;
+      setState({
+        ...step1Form,
+        title,
+        body,
+        photos,
+        isLoading: false
+      })
+      dispatch(fetchDataFOrStepForm())
+    } catch (error) {
+      dispatch(catchStepFormError(error.message))
+    }
+
   }
+  
   useEffect(()=> {
     getInitialDataForForm()
+    
   }, [])
   
   const customSelectOption = (item) => (
@@ -88,10 +105,8 @@ const Step1 = () => {
   const getBack = () => {
     push("/")
   }
-  return ( 
-    !step1Form.isLoading ?
-    <div className="form-container">
-      <h1 className="heading-secondary">First step to amazing article</h1>
+
+  const onStepForm = () => (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <h2 className="form-title">Step 1</h2>
       <label className="form-control-wrapper">
@@ -116,10 +131,20 @@ const Step1 = () => {
           }
       </label>
       <input className="form-btn" type="submit" />
-      <div className="form-btn-back" onClick={getBack}>Get back</div>
     </form>
-    </div>
-    : <div className="loader"></div>
+  )
+  const hasFormData = !(loading || formError);
+  const errorMessage = formError ? <ErrorIndicator error={formError}/> : null;
+  const spinner = loading ? <Spinner /> : null;
+  const content = hasFormData ? onStepForm() : null
+  return ( 
+<     div className="form-container">
+      <h1 className="heading-secondary">First step to amazing article</h1>
+        {errorMessage}
+        {spinner}
+        {content}
+        <div className="form-btn-back" onClick={getBack}>Get back</div>
+     </div>
   );
 };
 
