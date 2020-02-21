@@ -1,4 +1,4 @@
-import {postUrl} from '../../api';
+import {postUrl, photoUrl} from '../../api';
 import {getPostsArrayShortenAndTransformed} from '../../utils'
 
 const postRequest = () => {
@@ -60,3 +60,28 @@ export const getPostsFromJP = (postAmount, articlesArr) => async dispatch => {
 export const changeBtnStatuses =(id) => () => async(dispatch) => {
     dispatch(updatePost(id))
 }
+
+export  const getInitialDataForForm = (id) => () => async (dispatch) => {
+    try {
+      dispatch(stepFormRequest())
+      const currentPost = await postUrl.get(`/${id}`);
+      const photosArr = await photoUrl.get(`?albumId=${id}`);
+      const photos = photosArr.data.slice(0, 10).map(item => {
+        return {
+          url: item.url,
+          id: item.id,
+          photoTitle: item.title
+        }
+      })
+      dispatch(fetchDataFOrStepForm());
+      const {title, body} = currentPost.data;
+      return {
+        photos,
+        title,
+        body
+      }
+    } catch (error) {
+      dispatch(catchStepFormError(error.message))
+    }
+
+  }

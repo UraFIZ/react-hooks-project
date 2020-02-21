@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux"
+import { bindActionCreators } from 'redux'
+import {useDispatch, useSelector, connect} from "react-redux"
 import { useForm, ErrorMessage } from "react-hook-form";
 import _ from 'lodash';
 import { useHistory, useParams } from "react-router-dom";
-import {postUrl, photoUrl} from '../../../api';
 import { addArticlesStep1 } from '../../../redux/actions/articalsActions'
-import { catchStepFormError, fetchDataFOrStepForm, stepFormRequest } from '../../../redux/actions/postsActions'
+import { getInitialDataForForm } from '../../../redux/actions/postsActions'
 import Spinner from '../../../containers/spinner'
 import ErrorIndicator from '../../../containers/error-indicator'
 
 
-const Step1 = () => {
+const Step1 = ({getInitialDataForForm}) => {
   const { handleSubmit, errors, register } = useForm();
   const { push } = useHistory();
   const { id } = useParams();
-
+  const dispatch = useDispatch();
   //data from the redux store
   const formError = useSelector(state => state.posts.error);
   const loading = useSelector(state => state.posts.loading);
@@ -30,7 +30,6 @@ const Step1 = () => {
     showItems: false,
     selectedPhoto: {}
   });
-  const dispatch = useDispatch()
   const toggleCustomSelect = () => setDynamicState({
     showItems: !dynamicState.showItems
   })
@@ -39,38 +38,20 @@ const Step1 = () => {
       selectedPhoto: data
     })
   }
-
-  const getInitialDataForForm = async () => {
-    try {
-      dispatch(stepFormRequest())
-      const currentPost = await postUrl.get(`/${id}`);
-      const photosArr = await photoUrl.get(`?albumId=${id}`);
-      const photos = photosArr.data.slice(0, 10).map(item => {
-        return {
-          url: item.url,
-          id: item.id,
-          photoTitle: item.title
-        }
-      })
-      const {title, body} = currentPost.data;
-      setState({
-        ...step1Form,
-        title,
-        body,
-        photos,
-        isLoading: false
-      })
-      dispatch(fetchDataFOrStepForm())
-    } catch (error) {
-      dispatch(catchStepFormError(error.message))
-    }
-
+  const promiseOfData = async() => {
+    const data  =  await getInitialDataForForm();
+    const {photos,title,body} =  data;
+    setState({
+      ...step1Form,
+      photos,
+      title,
+      body
+    })
   }
   
   useEffect(()=> {
-    getInitialDataForForm()
-    
-  }, [])
+    promiseOfData()
+  },[])
   
   const customSelectOption = (item) => (
     <div onClick={() => onSelectItem(item)} key={item.id} className="custom-select" data={item.id}>
@@ -100,6 +81,10 @@ const Step1 = () => {
   const onSubmit = data => {
     const currentPhoto = dynamicState.selectedPhoto;
     dispatch(addArticlesStep1({...data, currentPhoto, id}))
+    // push({
+    //   pathname: `/step2/${id}`,
+    //   state: {...data, currentPhoto, id}
+    // });
     push(`/step2/${id}`);
   };
   const getBack = () => {
@@ -147,5 +132,11 @@ const Step1 = () => {
      </div>
   );
 };
-
-export default Step1;
+const mapDispatchToProps = (dispatch, props) => {
+  const {match} = props;
+  const {params} = match;
+  return bindActionCreators({
+    getInitialDataForForm: getInitialDataForForm(params.id)
+  }, dispatch)
+}
+export default connect(null, mapDispatchToProps)(Step1);
