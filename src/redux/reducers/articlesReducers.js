@@ -1,4 +1,4 @@
-import {addedInfoTOFirstStep, formNewArticleState, removeArticleFromState} from '../../utils'
+import { formNewArticleState, removeArticleFromState} from '../../utils'
 const initialState = {
     articles: [],
     loading: false,
