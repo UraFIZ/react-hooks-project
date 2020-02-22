@@ -1,13 +1,14 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import {useSelector} from 'react-redux'
-import { bindActionCreators } from 'redux'
-import {connect} from 'react-redux'
-import {getPostsFromJP} from '../../redux/actions/postsActions'
+import React from 'react';
+import PropTypes from 'prop-types'; 
+import { useForm } from 'react-hook-form';
+import {useSelector} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import {getPostsFromJP} from '../../redux/actions/postsActions';
 
 
  const SelectPosts = ({getPostsFromJP}) => {
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit } = useForm();
     const articles = useSelector(state => state.articles.articles);
 
     const onSubmit = data => {
@@ -34,4 +35,9 @@ const mapDispatchToProps = (dispatch) => {
         getPostsFromJP: getPostsFromJP,
     }, dispatch)
 }
+
 export default connect(null, mapDispatchToProps)(SelectPosts);
+
+SelectPosts.propTypes = {
+    getPostsFromJP: PropTypes.func,
+}

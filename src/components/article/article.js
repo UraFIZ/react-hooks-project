@@ -1,9 +1,11 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import { bindActionCreators } from 'redux'
-import {useSelector} from "react-redux"
-import { deleteArticle } from '../../redux/actions/articalsActions'
-import {changeBtnStatuses} from '../../redux/actions/postsActions'
+import React from 'react';
+import PropTypes, { bool } from 'prop-types';
+import { bindActionCreators } from 'redux';
+import {useSelector, connect} from "react-redux";
+import { deleteArticle } from '../../redux/actions/articalsActions';
+import {changeBtnStatuses} from '../../redux/actions/postsActions';
+
+
 const Article = ({title, subtitle, body, photo, id, date, email, isAllowedAd, deleteArticle, changeBtnStatuses}) => {
     const deleteArticleAndRefrash =()=> {
         deleteArticle();
@@ -42,3 +44,14 @@ const mapDispatchToProps = (dispatch, props) => {
     }, dispatch)
 }
 export default connect(null, mapDispatchToProps)(Article)
+Article.propTypes = {
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    photo: PropTypes.object,
+    id: PropTypes.number.isRequired,
+    date: PropTypes.string,
+    isAllowedAd: bool,
+    deleteArticle: PropTypes.func.isRequired,
+    changeBtnStatuses: PropTypes.func.isRequired
+}

@@ -15,12 +15,12 @@ const checkIfPostDisabledToWriteArticle = (posts, articles) => {
     if (articles.length > 0 && posts.length > 0) {
         return posts.map((item, inx) => {
             const data = articles.find((articlesItem) => {
-                if (item.id == articlesItem.id) {
+                if (item.id === articlesItem.id) {
                     return item
                 }
             })
-            if (data != undefined) {
-                if (item.id == data.id) {
+            if (data !== undefined) {
+                if (item.id === data.id) {
                     return { ...item, isUsed: true }
                 } else {
                     return item
@@ -50,8 +50,10 @@ export const formNewState = (state, data) => {
 export const getUpdatePostItem = (state, id) => {
     const { blanks } = state;
     if(blanks.length > 0) {
-        const currentInx = blanks.findIndex(item => item.id == id);
-        // const currentObj = blanks.find(item => item.id == id);
+        const currentInx = blanks.findIndex(item => item.id === id);
+        if(currentInx<0) {
+            return state
+        }
         const currentObj = blanks[currentInx]
         const value = !currentObj["isUsed"];
         // let opositIsUsedValue = currentObj

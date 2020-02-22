@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { useForm, ErrorMessage } from "react-hook-form";
 
 const Step2 = ({onSubmit}) => {
@@ -30,3 +31,7 @@ const Step2 = ({onSubmit}) => {
 };
 
 export default Step2;
+
+Step2.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+}

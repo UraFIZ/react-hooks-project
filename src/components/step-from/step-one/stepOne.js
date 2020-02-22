@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { useForm, ErrorMessage } from "react-hook-form";
 import _ from 'lodash';
 
@@ -66,3 +67,10 @@ const Step1 = ({onSubmit,onSelectItem, state, toggleCustomSelect, customSelectSt
 };
 
 export default Step1;
+Step1.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onSelectItem:PropTypes.func.isRequired,
+  state: PropTypes.object.isRequired,
+  toggleCustomSelect: PropTypes.func.isRequired,
+  customSelectState: PropTypes.object.isRequired
+}
