@@ -2,7 +2,7 @@
 import {formNewState, getUpdatePostItem} from '../../utils'
 const initialState = {
     blanks: [],
-    amount: null,
+    amount: 0,
     loading: false,
     error: ''
 }

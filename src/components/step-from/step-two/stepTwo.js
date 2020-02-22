@@ -1,33 +1,8 @@
 import React from "react";
-import { bindActionCreators } from 'redux'
 import { useForm, ErrorMessage } from "react-hook-form";
-import { useHistory, useParams } from "react-router-dom";
-import {useDispatch, useSelector, connect} from "react-redux"
-import { addArticlesStep2, catchErrorAction } from '../../../redux/actions/articalsActions'
-import {  changeBtnStatuses } from '../../../redux/actions/postsActions'
-import {baseURL} from '../../../api'
 
-const Step2 = props => {
+const Step2 = ({onSubmit}) => {
   const { handleSubmit, errors, register } = useForm();
-const dispatch = useDispatch();
-  const { push } = useHistory();
-  const { id } = useParams();
-
-
-
-  const onSubmit = data => {
-    const resultTwoSteps = Object.assign({}, article, data);
-    dispatch(addArticlesStep2({...data, id}));
-    try {
-      baseURL.post('/articles', resultTwoSteps);
-      props.changeBtnStatuses();
-    } catch (error) {
-      dispatch(catchErrorAction(error.message))
-    }
- 
-    push("/")
-  };
-  const article = useSelector(state => state.articles.articles.find(item => item.id ===id));
   return (
     <div className="form-container">
       <h1 className="heading-secondary">You are almost done</h1>
@@ -53,11 +28,5 @@ const dispatch = useDispatch();
 
   );
 };
-const mapDispatchToProps = (dispatch, props) => {
-  const {match} = props;
-  const {params} = match;
-  return bindActionCreators({
-      changeBtnStatuses: changeBtnStatuses(params.id)
-  }, dispatch)
-}
-export default connect(null, mapDispatchToProps)(Step2);
+
+export default Step2;

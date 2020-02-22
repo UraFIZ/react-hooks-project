@@ -3,7 +3,7 @@ import {baseURL} from '../../api';
 
 const addArticle =(data) => {
     return {
-        type: "ADD_ARTICLE_FIRST-STEP",
+        type: "ADD_ARTICLE",
         payload: data
     }
 }
@@ -31,8 +31,7 @@ export const catchErrorAction = (data) => {
         payload: data
     }
 }
-export const addArticlesStep1 = formValues => async dispatch => {
-    // baseURL.post('/articles', formValues)
+export const addArticleFromForm = formValues => async dispatch => {
     dispatch(addArticle(formValues))
 }
 export const addArticlesStep2 = formValues => async dispatch => {

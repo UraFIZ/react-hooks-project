@@ -13,19 +13,6 @@ const findPickedStateObj = (state, id) => {
         currentArticle
     }
 }
-export const addedInfoTOFirstStep = (state, data) => {
-    const { articles } = state;
-    const { objInx, currentArticle } = findPickedStateObj(articles, data.id);
-    const newArticle = { ...currentArticle, ...data }
-    const newArticles = [
-        ...articles.slice(0, objInx),
-        newArticle,
-        ...articles.slice(objInx+1)
-    ]
-    return {
-        ...state, articles: [...newArticles]
-    }
-}
 export const removeArticleFromState = (state, id) => {
     const { articles } = state;
     const { objInx, currentArticle } = findPickedStateObj(articles, id);

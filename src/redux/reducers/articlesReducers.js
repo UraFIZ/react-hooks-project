@@ -1,4 +1,4 @@
-import {addedInfoTOFirstStep, formNewArticleState, removeArticleFromState} from '../../utils'
+import { formNewArticleState, removeArticleFromState} from '../../utils'
 const initialState = {
     articles: [],
     loading: false,
@@ -12,13 +12,10 @@ const initialState = {
         return {
             ...state, error: payload, loading: false
         }
-        case "ADD_ARTICLE_FIRST-STEP": 
+        case "ADD_ARTICLE": 
         return {
             ...state, articles: [...state.articles, payload]
         }
-        // eslint-disable-next-line no-duplicate-case
-        case "ADD_ARTICLE_SECOND-STEP": 
-             return addedInfoTOFirstStep(state, payload)
         case "DELETE_ARTICLE":
             return removeArticleFromState(state, payload)
         default:
