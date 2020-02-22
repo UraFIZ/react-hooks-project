@@ -41,7 +41,6 @@ const StepForm = ({ getInitialDataForForm, changeBtnStatuses }) => {
   const promiseOfData = async () => {
     const data = await getInitialDataForForm();
     const { photos, title, body } = data;
-    console.log(photos)
     setState({
       ...stepForm,
       photos,
